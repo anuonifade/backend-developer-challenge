@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -6,10 +8,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load if Rails.env.development? || Rails.env.test?
+Dotenv::Rails.load if Rails.env.development? || Rails.env.test?
 
 module BackendDeveloperChallenge
   class Application < Rails::Application
+    # Set up app for Minitest
+    config.generators do |g|
+      g.test_framework :minitest, spec: true, fixture: true
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

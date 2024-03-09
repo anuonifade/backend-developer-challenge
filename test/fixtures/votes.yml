@@ -1,0 +1,7 @@
+one:
+  user_id: users(:one).id
+  candidate_id: candidates(:one).id
+
+two:
+  user_id: users(:two).id
+  candidate_id: candidates(:two).id

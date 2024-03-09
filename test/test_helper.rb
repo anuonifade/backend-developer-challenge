@@ -1,6 +1,9 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :transaction
 
 module ActiveSupport
   class TestCase
@@ -11,5 +14,15 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    self.use_transactional_tests = true
+
+    # Start and clean Database Cleaner around each test
+    setup do
+      DatabaseCleaner.start
+    end
+
+    teardown do
+      DatabaseCleaner.clean
+    end
   end
 end
