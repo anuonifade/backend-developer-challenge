@@ -4,14 +4,16 @@ services:
   web:
     build: .
     ports:
-      - "${PORT}:3000"
+      - "3000:3000"
     volumes:
       - .:/app
     depends_on:
       - db
     environment:
-      RAILS_ENV: production
+      RAILS_ENV: development
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/${POSTGRES_DB}
+    networks:
+      - voting_app
   db:
     image: postgres:latest
     volumes:
@@ -20,5 +22,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_PORT}
+    networks:
+      - voting_app
 volumes:
   pgdata:
+networks:
+  voting_app:

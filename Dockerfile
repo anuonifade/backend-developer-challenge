@@ -33,6 +33,10 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
+# Generate openssl the private/public key pair for JWT RS256 signing
+RUN openssl genrsa -out private_key.pem 2048
+RUN openssl rsa -pubout -in private_key.pem -out public_key.pem
+
 
 # Final stage for app image
 FROM base
