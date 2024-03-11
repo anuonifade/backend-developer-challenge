@@ -7,4 +7,13 @@ class Vote < ApplicationRecord
 
   validates_presence_of :user
   validates_presence_of :candidate
+
+  after_save :create_vote_change_log
+
+  def create_vote_change_log
+    old_candidate_id = attribute_changed?('candidate_id') ? previous_changes['candidate_id'][0] : nil
+
+    vote_change_logs.create(old_candidate_id:,
+                            new_candidate_id: candidate_id)
+  end
 end

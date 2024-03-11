@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[create index]
+      resources :votes, only: [:create]
       post '/login', to: 'sessions#create'
+      get '/candidates/:id/vote_count', to: 'candidates#vote_count'
+      get '/candidates/vote_counts', to: 'candidates#vote_counts_all'
 
       # Defines the root path route ("/")
     end
