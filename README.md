@@ -62,6 +62,10 @@ rails db:create # Should the dev and test database
 rails db:migrate # To create the tables, columns and relationships
 ```
 
+```ruby
+rails db:seed # Populate the database with initial data
+```
+
 #### Run the App
 
 ```
@@ -109,4 +113,4 @@ docker-compose build
 docker-compose up
 ```
 
-* App should be accessible on `http://localhost:3000.
+* App should be accessible on `http://localhost:3000`
